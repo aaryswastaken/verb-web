@@ -8,8 +8,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "cookies-next": "^2.0.3",
+    "english-verbs-irregular": "^2.1.2",
+    "irregular-verbs-de": "^0.2.0",
     "next": "12.0.7",
+    "node-english-irregular-verbs": "^1.0.1",
     "react": "17.0.2",
+    "react-cookie": "^4.1.1",
     "react-dom": "17.0.2"
   },
   "devDependencies": {

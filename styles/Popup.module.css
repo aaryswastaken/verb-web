@@ -1,0 +1,133 @@
+.container {
+    z-index: 100;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(131, 132, 204, 0.2);
+    backdrop-filter: blur(1px);
+}
+
+.frame {
+    position: relative;
+    top: 5%;
+    left: 5%;
+    height: 90%;
+    width: 90%;
+    background-color: #fff;
+}
+
+.exit {
+    font-size: 2em;
+    font-family: "Roboto Light", serif;
+    margin: 7px;
+}
+
+.alignV {
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.alignV > div {
+    height: 80%;
+    width: 100%;
+    padding: 3em 3em;
+}
+
+.alignV > div.scroll {
+    overflow-y: scroll;
+}
+
+.alignV > div:not(:last-child) {
+    border-right: 1px black solid;
+}
+
+.sectionHeader {
+    padding-bottom: 15px;
+    font-family: "Roboto Light", serif;
+    font-size: 1.4em;
+    margin-left: 5px;
+}
+
+.line20 {
+    border-bottom: solid black 1px;
+    width: 20%
+}
+
+.list {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.list > button {
+    text-align: left;
+    margin: 2px;
+    padding: 15px 15px 15px 30px;
+    border: none;
+    font-size: 1em;
+
+    transition: 0.1s ease-in-out;
+    background: #f5f5f5 none;
+}
+
+.list > button:hover {
+    transform: translate(10px, 0);
+}
+
+.rightButtonValign {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.defaultPButton {
+    border: none;
+    margin: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    font-family: "Roboto Light", serif;
+    transition: 0.3s ease-in-out;
+    background: #f3f3f3 none;
+    width: 20%;
+}
+
+.defaultPButton:hover {
+    background-color: #eaeaea;
+}
+
+.defaultPButton.grayed {
+    background-color: #252525 !important;
+    color: #f3f3f3 !important;
+}
+
+.defaultPButton.grayed:hover {
+    background-color: #252525 !important;
+    color: #f3f3f3 !important;
+}
+
+.none {
+
+}
+
+.selected {
+    transform: translate(10px, 0);
+    background-color: #e0e0e0 !important;
+}
+
+.inlineElement {
+    display: flex;
+    align-content: center;
+    align-items: flex-start;
+}
+
+.inlineElement > input {
+    margin : 5px;
+}

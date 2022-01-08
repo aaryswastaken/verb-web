@@ -1,3 +1,6 @@
+:root {
+}
+
 html,
 body {
   padding: 0;
@@ -13,4 +16,44 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.button1 {
+  border-radius: 30px;
+  border-style: hidden;
+  background-color: #286593;
+  padding: 10px 50px;
+  transition: 0.2s ease-in-out;
+}
+
+.button1:hover {
+  background-color: #254d6b;
+  padding: 7px 44px;
+  margin: 3px 6px;
+}
+
+.button1 > * {
+  color: #fff
+}
+
+.button1 > div:nth-child(1) {
+  font-size: 1.6em;
+  margin: 15px;
+}
+
+.button1 > div:nth-child(2) {
+  font-size: 1.1em;
+  margin: 10px;
+}
+
+.buttonDiv {
+  padding: 10px 10em;
+}
+
+.grayed {
+  background-color: #7c7c7c !important;
+}
+
+.grayed:hover {
+  background-color: #7c7c7c !important;
 }
