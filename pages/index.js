@@ -4,7 +4,7 @@ import { setCookies, getCookie } from 'cookies-next';
 import styles from '../styles/Home.module.css'
 import popup from '../styles/Popup.module.css'
 
-import Button from '../components/Button'
+import { Button, Button2 } from '../components/Button'
 import FullHeight from "../components/FullHeight"
 import Layout from "../components/Layout";
 import {Popup, PButton} from "../components/Popup";
@@ -16,7 +16,8 @@ export default class Home extends React.Component {
         super(props);
 
         this.state = {route: 0, languagePopupState: false, selectionPopupState: false,
-            language: [null, null], selection: [[], []], availableLanguages: {}, availableVerbs: []}
+            language: [null, null], selection: [[], []], availableLanguages: {}, availableVerbs: [], exercise: 0,
+            correction: {}, reveal: 0}
     }
 
     componentDidMount() {
@@ -136,6 +137,10 @@ export default class Home extends React.Component {
             }):["An error occurred please contact the web admin"])})
     }
 
+    resetAllSel() {
+        this.setState({language: [null, null], selection: [[], []]})
+    }
+
     render() {
         if (this.state.route === 0) {
             return (
@@ -148,7 +153,8 @@ export default class Home extends React.Component {
                     <div className={styles.centeredElements}>
                         <Button text={"Start"} subtext={"From scratch"} onclick={() => {
                             this.resetCookie();
-                            this.setState({route: 1})
+                            this.setState({route: 1});
+                            this.resetAllSel()
                         }}/>
                         <Button text={"Continue"} subtext={"From the last series"}
                                 onclick={() => {
@@ -239,6 +245,7 @@ export default class Home extends React.Component {
                                         grayed={(this.state.language[0] === null || this.state.selection[0].length === 0)}
                                         onclick={() => {
                                             this.validateChoice(this.state.language[0].toString(), Array.from(this.state.selection[0]))
+                                            this.setState({route: 2});
                                         }}/>
                             </div>
                         </div>
@@ -247,11 +254,62 @@ export default class Home extends React.Component {
                 </>
             )
         } else if (this.state.route === 2) {
-            return (
-                <div>
-                    {this.state.language[0]} {this.state.selection[0]}
-                </div>
-            )
+            if (this.state.exercise === 0) {
+                return (
+                    <Layout backFunction={() => {this.setState({route: 0})}} disableOverflowProtection={false}>
+                        <div className={styles.tableCTN}>
+                            <table>
+                                <tr>
+                                    <td>Infinitive</td>
+                                    <td>Past tense</td>
+                                    <td>Present perfect</td>
+                                </tr>
+                                <tr><td><div/></td><td><div/></td><td><div/></td></tr>
+                                {
+                                    this.state.selection[0].map(v => {
+                                        let verb = Object.entries(verbs[this.state.language[0]].list).map(([k, val]) => val)[v];
+                                        let r = Math.ceil(Math.random()*3)
+
+                                        return (
+                                            <tr key={v}>
+                                                <td>{r !== 1 ? <input id={verb.infinitive} className={"inANS"} type={"text"}/>:verb.infinitive}</td>
+                                                <td>{r !== 2 ? <input id={verb.pastTense} className={"inANS"} type={"text"}/>:verb.pastTense}</td>
+                                                <td>{r !== 3 ? <input id={verb.presentPerfect} className={"inANS"} type={"text"}/>:verb.presentPerfect}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </table>
+                            <div>
+                                <Button2 text={"Validate"} onclick={() => {
+                                    let userANS = document.getElementsByClassName("inANS");
+
+                                    Array.from(userANS).forEach((e) => {
+                                        // e.classList.add(e.value === e.id ? "correct":"false")
+                                        let c = (e.value === e.id ? "#099f09":"#a62020");
+
+                                        e.style.borderColor = c;
+                                        e.style.color = c;
+                                    })
+
+                                    // this.setState({reveal: 1})
+                                }} />
+
+                                <Button2 text={"Reload"} onclick={() => {
+                                    Array.from(document.getElementsByClassName("inANS")).forEach((e) => {
+                                        e.value = "";
+                                        e.style.borderColor = "";
+                                        e.style.color = "";
+                                    })
+
+                                    this.setState({reveal: 1}); // No reveal but refresh
+                                }}/>
+                            </div>
+                        </div>
+                        <FullHeight/>
+                    </Layout>
+                )
+            }
         }
     }
 }
